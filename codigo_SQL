@@ -1,0 +1,54 @@
+CREATE DATABASE triviadb;
+USE triviadb;
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    puntaje INT DEFAULT 0
+);
+CREATE TABLE preguntas_geografia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pregunta VARCHAR(255) NOT NULL,
+    opcion1 VARCHAR(255) NOT NULL,
+    opcion2 VARCHAR(255) NOT NULL,
+    opcion3 VARCHAR(255) NOT NULL,
+    opcion4 VARCHAR(255) NOT NULL,
+    respuesta_correcta INT NOT NULL
+);
+CREATE TABLE preguntas_historia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pregunta VARCHAR(255) NOT NULL,
+    opcion1 VARCHAR(255) NOT NULL,
+    opcion2 VARCHAR(255) NOT NULL,
+    opcion3 VARCHAR(255) NOT NULL,
+    opcion4 VARCHAR(255) NOT NULL,
+    respuesta_correcta INT NOT NULL
+);
+CREATE TABLE preguntas_gastronomia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pregunta VARCHAR(255) NOT NULL,
+    opcion1 VARCHAR(255) NOT NULL,
+    opcion2 VARCHAR(255) NOT NULL,
+    opcion3 VARCHAR(255) NOT NULL,
+    opcion4 VARCHAR(255) NOT NULL,
+    respuesta_correcta INT NOT NULL
+);
+CREATE TABLE preguntas_ciencia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pregunta VARCHAR(255) NOT NULL,
+    opcion1 VARCHAR(255) NOT NULL,
+    opcion2 VARCHAR(255) NOT NULL,
+    opcion3 VARCHAR(255) NOT NULL,
+    opcion4 VARCHAR(255) NOT NULL,
+    respuesta_correcta INT NOT NULL
+);
+INSERT INTO preguntas_geografia (pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
+('¿Cuál es la capital de Perú?', 'Lima', 'Cusco', 'Arequipa', 'Trujillo', 1),
+('¿Qué río atraviesa el Amazonas?', 'Río Marañón', 'Río Amazonas', 'Río Ucayali', 'Río Huallaga', 2),
+('¿Cuál es el país más grande de América del Sur?', 'Argentina', 'Brasil', 'Perú', 'Colombia', 2),
+('¿En qué continente se encuentra Egipto?', 'África', 'Asia', 'Europa', 'América', 1),
+('¿Cuál es el océano más grande del mundo?', 'Océano Atlántico', 'Océano Índico', 'Océano Pacífico', 'Océano Ártico', 3),
+('¿Qué país tiene la mayor población del mundo?', 'India', 'Estados Unidos', 'Indonesia', 'China', 4),
+('¿Cuál es la montaña más alta del mundo?', 'Mont Blanc', 'Monte Everest', 'K2', 'Kangchenjunga', 2),
+('¿Cuál es el desierto más grande del mundo?', 'Desierto de Gobi', 'Desierto del Sahara', 'Desierto de Arabia', 'Desierto de Kalahari', 2),
+('¿Qué país está más al norte?', 'Canadá', 'Rusia', 'Noruega', 'Islandia', 3),
+('¿Qué río es el más largo del mundo?', 'Río Nilo', 'Río Amazonas', 'Río Yangtsé', 'Río Misisipi', 2);
