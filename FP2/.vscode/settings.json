@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\Asus\\Downloads\\mysql-connector-j-9.0.0\\mysql-connector-j-9.0.0\\mysql-connector-j-9.0.0.jar",
+        "D:/Unsa Sistemas/2024-A/Fundamentos de la programacion 2/proyecto final/proyecto final/javafx-sdk-22.0.1/lib/*.jar"
+    ]
+}
