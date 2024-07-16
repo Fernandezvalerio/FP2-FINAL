@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Inicio",
+            "request": "launch",
+            "mainClass": "PruebasIniciales.Inicio",
+            "projectName": "FP2_dc974978"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Inicio",
+            "request": "launch",
+            "mainClass": "PruebasIniciales.Inicio",
+            "projectName": "FP2",
+            "vmArgs": "--module-path D:/Unsa Sistemas/2024-A/Fundamentos de la programacion 2/proyecto final/proyecto final/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
