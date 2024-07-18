@@ -1,14 +1,10 @@
 package PruebasIniciales;
-
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.sql.*;
-import javax.imageio.ImageIO;
-import javax.swing.table.DefaultTableModel;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.*;
@@ -18,8 +14,9 @@ import javafx.scene.media.*;
 public class Inicio extends JPanel {
 
     private static final String VIDEO_PATH = "../video/fondo.mp4"; // Ruta al archivo de video
+    private static final String CREDITOS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Créditos
+    private static final String LOGROS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Logros
 
-    private BufferedImage imagenFondo;
     private String nombreUsuario;
     private String titulo = "PluzTrivERu";
     private String subtitulo = "Aprende el que pregunta Edición Perú";
@@ -78,9 +75,19 @@ public class Inicio extends JPanel {
         gbc.insets = new Insets(20, 0, 20, 0);
         overlayPanel.add(titleLabel, gbc);
 
+        // Subtítulo
+        JLabel subtitleLabel = new JLabel(subtitulo);
+        subtitleLabel.setFont(new Font("Arial", Font.ITALIC, 30));
+        subtitleLabel.setForeground(Color.YELLOW);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(5, 0, 20, 0);
+        overlayPanel.add(subtitleLabel, gbc);
+
         // Panel de botones
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
+        buttonPanel.setLayout(new GridLayout(4, 1, 10, 10));
         buttonPanel.setOpaque(false);
 
         JButton iniciarJuegoButton = new JButton("Iniciar Juego");
@@ -97,6 +104,13 @@ public class Inicio extends JPanel {
         addHoverEffect(logrosButton);
         buttonPanel.add(logrosButton);
 
+        JButton creditosButton = new JButton("Créditos");
+        creditosButton.setFont(new Font("Arial", Font.BOLD, 30));
+        creditosButton.setBackground(Color.RED);
+        creditosButton.setForeground(Color.WHITE);
+        addHoverEffect(creditosButton);
+        buttonPanel.add(creditosButton);
+
         JButton salirButton = new JButton("Salir");
         salirButton.setFont(new Font("Arial", Font.BOLD, 30));
         salirButton.setBackground(Color.RED);
@@ -105,7 +119,7 @@ public class Inicio extends JPanel {
         buttonPanel.add(salirButton);
 
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(10, 10, 10, 10);
         overlayPanel.add(buttonPanel, gbc);
@@ -116,6 +130,7 @@ public class Inicio extends JPanel {
         // Añadir ActionListeners a los botones
         iniciarJuegoButton.addActionListener(e -> mostrarPanelNombre());
         logrosButton.addActionListener(e -> mostrarPanelLogros());
+        creditosButton.addActionListener(e -> mostrarPanelCreditos());
         salirButton.addActionListener(e -> System.exit(0));
     }
 
@@ -153,14 +168,6 @@ public class Inicio extends JPanel {
         // Crear el Scene y agregar el MediaView
         Scene scene = new Scene(pane);
         fxPanel.setScene(scene);
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (imagenFondo != null) {
-            g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this);
-        }
     }
 
     public void setTitulo(String titulo) {
@@ -207,25 +214,27 @@ public class Inicio extends JPanel {
         ImageIcon historiaIcon = new ImageIcon(getClass().getResource("../imagenes/historia.png"));
         ImageIcon geografiaIcon = new ImageIcon(getClass().getResource("../imagenes/geografia.png"));
         ImageIcon gastronomiaIcon = new ImageIcon(getClass().getResource("../imagenes/gastronomia.png"));
-        ImageIcon cienciaIcon = new ImageIcon(getClass().getResource("../imagenes/mitologia.png"));
+        ImageIcon mitologiaIcon = new ImageIcon(getClass().getResource("../imagenes/mitologia.png"));
     
         // Crear los botones con las imágenes de fondo
         JButton historiaButton = new ImageButton("Historia", historiaIcon);
         JButton geografiaButton = new ImageButton("Geografía", geografiaIcon);
         JButton gastronomiaButton = new ImageButton("Gastronomía", gastronomiaIcon);
-        JButton cienciaButton = new ImageButton("Ciencia", cienciaIcon);
+        JButton mitologiaButton = new ImageButton("Ciencia", mitologiaIcon);
     
         addHoverEffect(historiaButton);
         addHoverEffect(geografiaButton);
         addHoverEffect(gastronomiaButton);
-        addHoverEffect(cienciaButton);
+        addHoverEffect(mitologiaButton);
     
         geografiaButton.addActionListener(e -> mostrarPreguntasGeografia());
+        mitologiaButton.addActionListener(e -> mostrarPreguntasMitologia());
+        
     
         overlayPanel.add(historiaButton);
         overlayPanel.add(geografiaButton);
         overlayPanel.add(gastronomiaButton);
-        overlayPanel.add(cienciaButton);
+        overlayPanel.add(mitologiaButton);
     
         layeredPane.removeAll();
         layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
@@ -234,16 +243,27 @@ public class Inicio extends JPanel {
         layeredPane.revalidate();
     }
     
-    
-    
-
     private void mostrarPreguntasGeografia() {
         overlayPanel = new JPanel(new BorderLayout());
         overlayPanel.setOpaque(false);
         overlayPanel.setBounds(0, 0, getWidth(), getHeight());
-
+    
         overlayPanel.add(new PreguntaGeografia(nombreUsuario), BorderLayout.CENTER);
+    
+        layeredPane.removeAll();
+        layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
+        layeredPane.add(overlayPanel, Integer.valueOf(2)); // Añadir el panel de botones en la capa superior
+        layeredPane.repaint();
+        layeredPane.revalidate();
+    }
 
+    private void mostrarPreguntasMitologia() {
+        overlayPanel = new JPanel(new BorderLayout());
+        overlayPanel.setOpaque(false);
+        overlayPanel.setBounds(0, 0, getWidth(), getHeight());
+    
+        overlayPanel.add(new PreguntaMitologia(nombreUsuario), BorderLayout.CENTER);
+    
         layeredPane.removeAll();
         layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
         layeredPane.add(overlayPanel, Integer.valueOf(2)); // Añadir el panel de botones en la capa superior
@@ -252,23 +272,41 @@ public class Inicio extends JPanel {
     }
 
     private void mostrarPanelCreditos() {
-        overlayPanel = new JPanel(new GridLayout(5, 1));
+        overlayPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon backgroundIcon = new ImageIcon(getClass().getResource(CREDITOS_IMAGE_PATH));
+                Image background = backgroundIcon.getImage();
+                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         overlayPanel.setOpaque(false);
         overlayPanel.setBounds(0, 0, getWidth(), getHeight());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        // Panel de botones centrado
+        JPanel creditosPanel = new JPanel(new GridLayout(5, 1, 10, 10));
+        creditosPanel.setOpaque(false);
 
         JButton valerioButton = new JButton("Valerio");
         JButton valerio2Button = new JButton("Valerio2");
-        JButton valio3Button = new JButton("Valio3");
+        JButton valerio3Button = new JButton("Valerio3");
         JButton valerio4Button = new JButton("Valerio4");
         JButton salirButton = new JButton("Salir");
 
         salirButton.addActionListener(e -> mostrarPanelInicio());
 
-        overlayPanel.add(valerioButton);
-        overlayPanel.add(valerio2Button);
-        overlayPanel.add(valio3Button);
-        overlayPanel.add(valerio4Button);
-        overlayPanel.add(salirButton);
+        creditosPanel.add(valerioButton);
+        creditosPanel.add(valerio2Button);
+        creditosPanel.add(valerio3Button);
+        creditosPanel.add(valerio4Button);
+        creditosPanel.add(salirButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        overlayPanel.add(creditosPanel, gbc);
 
         layeredPane.removeAll();
         layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
@@ -278,9 +316,23 @@ public class Inicio extends JPanel {
     }
 
     private void mostrarPanelLogros() {
-        overlayPanel = new JPanel(new BorderLayout());
+        overlayPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon backgroundIcon = new ImageIcon(getClass().getResource(LOGROS_IMAGE_PATH));
+                Image background = backgroundIcon.getImage();
+                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         overlayPanel.setOpaque(false);
         overlayPanel.setBounds(0, 0, getWidth(), getHeight());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        // Panel con la tabla centrada
+        JPanel logrosPanel = new JPanel(new BorderLayout());
+        logrosPanel.setOpaque(false);
 
         String[] columnNames = {"Nombre", "Puntaje"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -301,7 +353,16 @@ public class Inicio extends JPanel {
 
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
-        overlayPanel.add(scrollPane, BorderLayout.CENTER);
+        logrosPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Agregar botón Salir
+        JButton salirButton = new JButton("Salir");
+        salirButton.addActionListener(e -> mostrarPanelInicio());
+        logrosPanel.add(salirButton, BorderLayout.SOUTH);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        overlayPanel.add(logrosPanel, gbc);
 
         layeredPane.removeAll();
         layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
