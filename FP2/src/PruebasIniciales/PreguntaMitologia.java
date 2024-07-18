@@ -160,17 +160,6 @@ public class PreguntaMitologia extends JPanel {
         label.repaint(); // Asegurarse de que el cambio de fuente se refleje en el componente
     }
 
-    private void verificarRespuesta(int respuestaSeleccionada, int respuestaCorrecta) {
-        if (respuestaSeleccionada == respuestaCorrecta) {
-            JOptionPane.showMessageDialog(this, "¡Muy bien!");
-            puntaje += 10;
-            indicePreguntaActual++;
-            mostrarSiguientePregunta();
-        } else {
-            JOptionPane.showMessageDialog(this, "Más suerte para la próxima.");
-        }
-    }
-
     private void mostrarResultadoFinal() {
         JOptionPane.showMessageDialog(this, nombreUsuario + " tiene un puntaje de " + puntaje + " puntos.");
         guardarPuntajeEnBD();
