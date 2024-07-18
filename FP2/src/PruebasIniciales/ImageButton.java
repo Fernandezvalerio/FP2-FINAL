@@ -10,11 +10,10 @@ public class ImageButton extends JButton {
         this.backgroundImage = icon.getImage();
         setContentAreaFilled(false);
         setFocusPainted(false);
-        setBorderPainted(false);
+        setBorderPainted(true);
         setOpaque(false);
         setHorizontalTextPosition(JButton.CENTER);
         setVerticalTextPosition(JButton.CENTER);
-        setForeground(Color.YELLOW); // Para que el texto sea visible sobre la imagen
     }
 
     @Override
@@ -28,7 +27,7 @@ public class ImageButton extends JButton {
 
         // Dibujar el texto con contorno
         String text = getText();
-        Font font = getFont().deriveFont(Font.BOLD, 30f); // Aumentar el tamaño de la fuente
+        Font font = getFont().deriveFont(Font.BOLD, 50f); // Aumentar el tamaño de la fuente
         g2.setFont(font);
         FontMetrics fm = g2.getFontMetrics();
         int x = (getWidth() - fm.stringWidth(text)) / 2;
@@ -36,14 +35,13 @@ public class ImageButton extends JButton {
 
         // Dibujar el contorno del texto
         g2.setColor(Color.BLACK);
-        g2.drawString(text, x - 1, y - 1);
-        g2.drawString(text, x - 1, y + 1);
-        g2.drawString(text, x + 1, y - 1);
-        g2.drawString(text, x + 1, y + 1);
-        g2.drawString(text, x - 2, y);
-        g2.drawString(text, x + 2, y);
-        g2.drawString(text, x, y - 2);
-        g2.drawString(text, x, y + 2);
+        for (int i = -2; i <= 2; i++) {
+            for (int j = -2; j <= 2; j++) {
+                if (i != 0 || j != 0) { // Evitar dibujar el texto principal en el centro
+                    g2.drawString(text, x + i, y + j);
+                }
+            }
+        }
 
         // Dibujar el texto principal
         g2.setColor(Color.YELLOW);
@@ -53,4 +51,3 @@ public class ImageButton extends JButton {
         super.paintComponent(g);
     }
 }
-
