@@ -232,7 +232,7 @@ public class Inicio extends JPanel {
         JButton historiaButton = new ImageButton("Historia", historiaIcon);
         JButton geografiaButton = new ImageButton("Geografía", geografiaIcon);
         JButton gastronomiaButton = new ImageButton("Gastronomía", gastronomiaIcon);
-        JButton mitologiaButton = new ImageButton("Ciencia", mitologiaIcon);
+        JButton mitologiaButton = new ImageButton("Mitologia", mitologiaIcon);
     
         addHoverEffect(historiaButton);
         addHoverEffect(geografiaButton);

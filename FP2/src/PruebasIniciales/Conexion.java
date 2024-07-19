@@ -8,7 +8,7 @@ public class Conexion {
     private static final String PORT = "3307"; // Puerto de la base de datos, cambiar a 3306 si es necesario
     private static final String DB_NAME = "triviadb"; // Nombre de la base de datos
     private static final String USERNAME = "root"; // Nombre de usuario para la conexión
-    private static final String PASSWORD = "2020"; // Contraseña para la conexión
+    private static final String PASSWORD = "Plateado"; // Contraseña para la conexión
 
     // Método para obtener la conexión a la base de datos
     public static Connection getConnection() throws SQLException {
