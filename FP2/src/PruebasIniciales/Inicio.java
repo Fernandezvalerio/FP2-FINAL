@@ -1,9 +1,12 @@
 package PruebasIniciales;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -16,6 +19,8 @@ public class Inicio extends JPanel {
     private static final String VIDEO_PATH = "../video/fondo.mp4"; // Ruta al archivo de video
     private static final String CREDITOS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Créditos
     private static final String LOGROS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Logros
+    private static final String SOUND_PATH = "../sonidos/inicio.wav"; // Ruta al archivo de sonido
+    private static final String PREGUNTAS_SOUND_PATH = "../sonidos/panel.wav"; // Ruta al archivo de sonido de preguntas
 
     private String nombreUsuario;
     private String titulo = "PluzTrivERu";
@@ -23,6 +28,7 @@ public class Inicio extends JPanel {
     private JLayeredPane layeredPane;
     private JPanel overlayPanel;
     private JFXPanel fxPanel;
+    private Clip currentClip;
 
     public Inicio() {
         setLayout(new BorderLayout());
@@ -42,6 +48,9 @@ public class Inicio extends JPanel {
 
         // Iniciar el entorno de JavaFX
         Platform.runLater(() -> initFX(fxPanel));
+
+        // Reproducir sonido de inicio
+        currentClip = SoundUtils.playSound(SOUND_PATH);
 
         // Crear y configurar el panel de botones y título
         mostrarPanelInicio();
@@ -185,12 +194,15 @@ public class Inicio extends JPanel {
         JPanel panel = new JPanel();
         panel.add(new JLabel("Ingrese su nombre:"));
         panel.add(nombreField);
-
+    
         int result = JOptionPane.showConfirmDialog(null, panel, "Nombre de Usuario", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             nombreUsuario = nombreField.getText();
             guardarUsuarioEnBD();
             mostrarPanelCategorias();
+            // Añadir reproducción de sonido después de mostrar las categorías
+            stopCurrentClip();
+            currentClip = SoundUtils.playSound(PREGUNTAS_SOUND_PATH);
         }
     }
 
@@ -227,9 +239,12 @@ public class Inicio extends JPanel {
         addHoverEffect(gastronomiaButton);
         addHoverEffect(mitologiaButton);
     
-        geografiaButton.addActionListener(e -> mostrarPreguntasGeografia());
-        mitologiaButton.addActionListener(e -> mostrarPreguntasMitologia());
-        
+        geografiaButton.addActionListener(e -> {
+            mostrarPreguntasGeografia();
+        });
+        mitologiaButton.addActionListener(e -> {
+            mostrarPreguntasMitologia();
+        });
     
         overlayPanel.add(historiaButton);
         overlayPanel.add(geografiaButton);
@@ -382,6 +397,13 @@ public class Inicio extends JPanel {
         layeredPane.add(overlayPanel, Integer.valueOf(2));
         layeredPane.repaint();
         layeredPane.revalidate();
+    }
+    
+    private void stopCurrentClip() {
+        if (currentClip != null && currentClip.isRunning()) {
+            currentClip.stop();
+            currentClip.close();
+        }
     }
 
     private static void createAndShowGUI() {
