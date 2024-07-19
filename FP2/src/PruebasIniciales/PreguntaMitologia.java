@@ -1,9 +1,11 @@
 package PruebasIniciales;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +16,8 @@ public class PreguntaMitologia extends JPanel {
     private int indicePreguntaActual = 0;
     private int puntaje = 0;
     private String nombreUsuario;
+    private static final String CORRECT_SOUND_PATH = "../sonidos/correct.wav"; // Ruta al archivo de sonido de respuesta correcta
+    private static final String ERROR_SOUND_PATH = "../sonidos/error.wav"; // Ruta al archivo de sonido de respuesta incorrecta
 
     public PreguntaMitologia(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
@@ -110,8 +114,10 @@ public class PreguntaMitologia extends JPanel {
             Color originalColor = boton.getBackground();
             if (opcion == correcta) {
                 boton.setBackground(new Color(140, 255, 140, 128)); // Verde semitransparente
+                playSound(CORRECT_SOUND_PATH); // Reproducir sonido de respuesta correcta
             } else {
                 boton.setBackground(new Color(255, 13, 17, 128)); // Rojo semitransparente
+                playSound(ERROR_SOUND_PATH); // Reproducir sonido de respuesta incorrecta
             }
             boton.repaint();
 
@@ -175,6 +181,17 @@ public class PreguntaMitologia extends JPanel {
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private void playSound(String soundFile) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(soundFile));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 
