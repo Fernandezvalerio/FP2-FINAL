@@ -306,12 +306,15 @@ public class Inicio extends JPanel {
         creditosPanel.setOpaque(false);
 
         JButton valerioButton = new JButton("Valerio");
-        JButton valerio2Button = new JButton("Valerio2");
+        JButton valerio2Button = new JButton("Andres");
         JButton valerio3Button = new JButton("Valerio3");
         JButton valerio4Button = new JButton("Valerio4");
         JButton salirButton = new JButton("Salir");
 
-        salirButton.addActionListener(e -> mostrarPanelInicio());
+        salirButton.addActionListener(e -> {
+            layeredPane.remove(overlayPanel);
+            mostrarPanelInicio();
+        });
 
         creditosPanel.add(valerioButton);
         creditosPanel.add(valerio2Button);
