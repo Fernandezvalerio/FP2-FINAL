@@ -52,3 +52,15 @@ INSERT INTO preguntas_geografia (pregunta, opcion1, opcion2, opcion3, opcion4, r
 ('¿Cuál es el desierto más grande del mundo?', 'Desierto de Gobi', 'Desierto del Sahara', 'Desierto de Arabia', 'Desierto de Kalahari', 2),
 ('¿Qué país está más al norte?', 'Canadá', 'Rusia', 'Noruega', 'Islandia', 3),
 ('¿Qué río es el más largo del mundo?', 'Río Nilo', 'Río Amazonas', 'Río Yangtsé', 'Río Misisipi', 2);
+
+INSERT INTO preguntas_gastronomia (pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
+('¿Cuál es el plato emblemático de la cocina peruana a base de pescado crudo marinado en jugo de limón?', 'Anticuchos', 'Lomo Saltado', 'Ceviche', 'Ají de Gallina', 'Ceviche'),
+('¿Cómo se llama el plato tradicional peruano que consiste en carne de res salteada con cebolla, tomate, y papas fritas?', 'Seco de Cordero', 'Lomo Saltado', 'Causa Limeña', 'Tacu Tacu', 'Lomo Saltado'),
+('¿Qué bebida alcohólica es considerada el licor nacional de Perú?', 'Ron', 'Vodka', 'Pisco', 'Tequila', 'Pisco'),
+('¿Qué plato peruano se prepara tradicionalmente en una olla de barro enterrada y cocida con piedras calientes?', 'Chupe de Camarones', 'Pachamanca', 'Carapulcra', 'Adobo', 'Pachamanca'),
+('¿Cuál es el plato típico peruano hecho a base de una mezcla de papa amarilla, ají amarillo y atún o pollo?', 'Rocoto Relleno', 'Tiradito', 'Causa Limeña', 'Arroz Chaufa', 'Causa Limeña'),
+('¿Cuál es el nombre del tubérculo andino que es un ingrediente básico en muchos platos peruanos?', 'Yuca', 'Papa', 'Camote', 'Olluco', 'Papa'),
+('¿Cuál es el postre típico peruano hecho de maíz morado y frutas?', 'Turrón de Doña Pepa', 'Mazamorra Morada', 'Picarones', 'Suspiro a la Limeña', 'Mazamorra Morada'),
+('¿Cuál es el nombre del plato de origen afroperuano hecho con bofe (pulmón de res) y papas?', 'Chanfainita', 'Cau Cau', 'Sangrecita', 'Ají de Gallina', 'Chanfainita'),
+('¿Cuál es el nombre del plato de la región amazónica peruana que se prepara con gallina envuelto en hojas de bijao?', 'Seco de pescado', 'Tacacho con cecina', 'Juane', 'Paiche a la parrilla', 'Juane'),
+('¿Qué tipo de carne se utiliza en la preparación tradicional del "Anticucho"?', 'Carne de pollo', 'Carne de res', 'Corazón de res', 'Carne de cerdo', 'Corazón de res');
