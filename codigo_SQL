@@ -64,3 +64,15 @@ INSERT INTO preguntas_gastronomia (pregunta, opcion1, opcion2, opcion3, opcion4,
 ('¿Cuál es el nombre del plato de origen afroperuano hecho con bofe (pulmón de res) y papas?', 'Chanfainita', 'Cau Cau', 'Sangrecita', 'Ají de Gallina', 'Chanfainita'),
 ('¿Cuál es el nombre del plato de la región amazónica peruana que se prepara con gallina envuelto en hojas de bijao?', 'Seco de pescado', 'Tacacho con cecina', 'Juane', 'Paiche a la parrilla', 'Juane'),
 ('¿Qué tipo de carne se utiliza en la preparación tradicional del "Anticucho"?', 'Carne de pollo', 'Carne de res', 'Corazón de res', 'Carne de cerdo', 'Corazón de res');
+
+INSERT INTO preguntas_historia (pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
+('¿Quién fue el primer presidente del Perú?', 'Ramón Castilla', 'Simón Bolívar', 'José de San Martín', 'José de la Riva-Agüero', 4),
+('¿Qué cultura precolombina construyó Machu Picchu?', 'Nazca', 'Moche', 'Inca', 'Chavín', 3),
+('¿En qué año se declaró la independencia del Perú?', '1821', '1824', '1820', '1819', 1),
+('¿Quién fue el último emperador Inca?', 'Pachacútec', 'Manco Cápac', 'Túpac Amaru II', 'Atahualpa', 4),
+('¿Qué batalla marcó el fin de la Guerra del Pacífico para Perú?', 'Batalla de Arica', 'Batalla de Angamos', 'Batalla de San Juan', 'Batalla de Huamachuco', 4),
+('¿Qué presidente peruano fue conocido como el “Protector del Perú”?', 'Simón Bolívar', 'Ramón Castilla', 'José de San Martín', 'Andrés Avelino Cáceres', 3),
+('¿Qué líder indígena encabezó la Gran Rebelión de 1780?', 'Túpac Amaru II', 'Manco Inca', 'Atahualpa', 'Túpac Yupanqui', 1),
+('¿Cuál fue la primera civilización en el territorio peruano?', 'Inca', 'Moche', 'Nazca', 'Caral', 4),
+('¿Qué presidente implementó la Reforma Agraria en 1969?', 'Fernando Belaúnde Terry', 'Juan Velasco Alvarado', 'Alberto Fujimori', 'Alejandro Toledo', 2),
+('¿Qué tratado puso fin a la Guerra del Pacífico?', 'Tratado de Ancón', 'Tratado de Ayacucho', 'Tratado de Versalles', 'Tratado de Tordesillas', 1);
