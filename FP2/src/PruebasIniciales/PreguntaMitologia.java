@@ -16,11 +16,13 @@ public class PreguntaMitologia extends JPanel {
     private int indicePreguntaActual = 0;
     private int puntaje = 0;
     private String nombreUsuario;
+    private Inicio inicio;
     private static final String CORRECT_SOUND_PATH = "../sonidos/correct.wav"; // Ruta al archivo de sonido de respuesta correcta
     private static final String ERROR_SOUND_PATH = "../sonidos/error.wav"; // Ruta al archivo de sonido de respuesta incorrecta
 
-    public PreguntaMitologia(String nombreUsuario) {
+    public PreguntaMitologia(String nombreUsuario, Inicio inicio) {
         this.nombreUsuario = nombreUsuario;
+        this.inicio = inicio;
         cargarPreguntasDesdeBD();
         setLayout(new BorderLayout());
         mostrarSiguientePregunta();
@@ -169,7 +171,7 @@ public class PreguntaMitologia extends JPanel {
     private void mostrarResultadoFinal() {
         JOptionPane.showMessageDialog(this, nombreUsuario + " tiene un puntaje de " + puntaje + " puntos.");
         guardarPuntajeEnBD();
-        System.exit(0); // Salir del juego
+        inicio.mostrarPantallaInicial();
     }
 
     private void guardarPuntajeEnBD() {
