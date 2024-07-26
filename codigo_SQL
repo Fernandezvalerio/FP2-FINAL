@@ -32,7 +32,7 @@ CREATE TABLE preguntas_gastronomia (
     opcion4 VARCHAR(255) NOT NULL,
     respuesta_correcta INT NOT NULL
 );
-CREATE TABLE preguntas_ciencia (
+CREATE TABLE preguntas_mitologia (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pregunta VARCHAR(255) NOT NULL,
     opcion1 VARCHAR(255) NOT NULL,
@@ -76,3 +76,15 @@ INSERT INTO preguntas_historia (pregunta, opcion1, opcion2, opcion3, opcion4, re
 ('¿Cuál fue la primera civilización en el territorio peruano?', 'Inca', 'Moche', 'Nazca', 'Caral', 4),
 ('¿Qué presidente implementó la Reforma Agraria en 1969?', 'Fernando Belaúnde Terry', 'Juan Velasco Alvarado', 'Alberto Fujimori', 'Alejandro Toledo', 2),
 ('¿Qué tratado puso fin a la Guerra del Pacífico?', 'Tratado de Ancón', 'Tratado de Ayacucho', 'Tratado de Versalles', 'Tratado de Tordesillas', 1);
+
+INSERT INTO preguntas_mitologia (id, pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
+(11, '¿Quién es el dios creador en la mitología inca?', 'Inti', 'Viracocha', 'Pachamama', 'Illapa', 2),
+(12, '¿Qué dios inca es conocido como el dios del sol?', 'Inti', 'Viracocha', 'Pachacamac', 'Supay', 1),
+(13, '¿Quién es la diosa de la tierra y la fertilidad en la mitología inca?', 'Mama Quilla', 'Mama Ocllo', 'Pachamama', 'Coyllur', 3),
+(14, '¿Qué dios inca es conocido por controlar la lluvia y los rayos?', 'Apu', 'Inti', 'Viracocha', 'Illapa', 4),
+(15, '¿Cuál es el nombre del dios del inframundo en la mitología inca?', 'Supay', 'Pachacamac', 'Inti', 'Viracocha', 1),
+(16, '¿Quién es la diosa de la luna en la mitología inca?', 'Mama Quilla', 'Mama Ocllo', 'Pachamama', 'Coyllur', 1),
+(17, '¿Cuál es el nombre del dios del fuego en la mitología inca?', 'Inti', 'Supay', 'Viracocha', 'Kuniraya', 4),
+(18, '¿Qué héroe mítico andino es conocido por su hazaña en la batalla de Vilcabamba?', 'Tupac Amaru', 'Mama Quilla', 'Kon Tiki', 'Karu', 1),
+(19, '¿Qué montaña sagrada es considerada la residencia de los dioses en la mitología inca?', 'Machu Picchu', 'Ausangate', 'Salkantay', 'Huascarán', 2),
+(20, '¿Quién es la diosa madre de los incas, asociada a la creación y la fertilidad?', 'Mama Quilla', 'Mama Ocllo', 'Pachamama', 'Coyllur', 3);
