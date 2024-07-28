@@ -87,33 +87,36 @@ public class PreguntaGastronomia extends JPanel {
             mostrarResultadoFinal();
         }
     }
+//------------------------------------------------------------------------------------------
 
     private JButton crearBotonOpcion(String texto, int opcion, int correcta) {
         JButton boton = new JButton(texto);
         boton.setFont(new Font("Arial", Font.PLAIN, 40));
-        boton.setContentAreaFilled(false);
-        boton.setOpaque(true);
+        boton.setForeground(Color.WHITE); // Texto de color blanco
+        boton.setBackground(Color.BLACK); // Fondo de color negro
+        boton.setContentAreaFilled(true); // Llenar el área de contenido
+        boton.setOpaque(true);  // Asegúrate de que el botón sea opaco
 
         boton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (boton.getBackground().equals(UIManager.getColor("Button.background"))) {
-                    boton.setBackground(new Color(255, 255, 0, 128)); // Amarillo semitransparente
+                if (boton.getBackground().equals(Color.BLACK)) {
+                    boton.setBackground(new Color(100, 100, 100)); // Gris oscuro al pasar el mouse
                 }
                 boton.repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (boton.getBackground().equals(new Color(255, 255, 0, 128))) {
-                    boton.setBackground(UIManager.getColor("Button.background"));
+                if (!boton.getBackground().equals(new Color(140, 255, 140, 128)) &&
+                    !boton.getBackground().equals(new Color(255, 13, 17, 128))) {
+                    boton.setBackground(Color.BLACK); // Restablece al color negro
                 }
                 boton.repaint();
             }
         });
 
         boton.addActionListener(e -> {
-            Color originalColor = boton.getBackground();
             if (opcion == correcta) {
                 boton.setBackground(new Color(140, 255, 140, 128)); // Verde semitransparente
                 playSound(CORRECT_SOUND_PATH); // Reproducir sonido de respuesta correcta
@@ -121,6 +124,7 @@ public class PreguntaGastronomia extends JPanel {
                 boton.setBackground(new Color(255, 13, 17, 128)); // Rojo semitransparente
                 playSound(ERROR_SOUND_PATH); // Reproducir sonido de respuesta incorrecta
             }
+            boton.setOpaque(true);
             boton.repaint();
 
             Timer timer = new Timer(1000, event -> {
@@ -128,7 +132,7 @@ public class PreguntaGastronomia extends JPanel {
                     puntaje += 10;
                     indicePreguntaActual++;
                 }
-                boton.setBackground(originalColor);
+                boton.setBackground(Color.BLACK); // Restablece al color negro
                 mostrarSiguientePregunta();
             });
             timer.setRepeats(false);
@@ -137,6 +141,8 @@ public class PreguntaGastronomia extends JPanel {
 
         return boton;
     }
+
+    //------------------------------------------------------------------------------------------
 
     private void ajustarTamañoFuente(JLabel label, String text) {
         Font font = label.getFont();
