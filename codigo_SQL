@@ -42,16 +42,24 @@ CREATE TABLE preguntas_mitologia (
     respuesta_correcta INT NOT NULL
 );
 INSERT INTO preguntas_geografia (pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
-('¿Cuál es la capital de Perú?', 'Lima', 'Cusco', 'Arequipa', 'Trujillo', 1),
-('¿Qué río atraviesa el Amazonas?', 'Río Marañón', 'Río Amazonas', 'Río Ucayali', 'Río Huallaga', 2),
-('¿Cuál es el país más grande de América del Sur?', 'Argentina', 'Brasil', 'Perú', 'Colombia', 2),
-('¿En qué continente se encuentra Egipto?', 'África', 'Asia', 'Europa', 'América', 1),
-('¿Cuál es el océano más grande del mundo?', 'Océano Atlántico', 'Océano Índico', 'Océano Pacífico', 'Océano Ártico', 3),
-('¿Qué país tiene la mayor población del mundo?', 'India', 'Estados Unidos', 'Indonesia', 'China', 4),
-('¿Cuál es la montaña más alta del mundo?', 'Mont Blanc', 'Monte Everest', 'K2', 'Kangchenjunga', 2),
-('¿Cuál es el desierto más grande del mundo?', 'Desierto de Gobi', 'Desierto del Sahara', 'Desierto de Arabia', 'Desierto de Kalahari', 2),
-('¿Qué país está más al norte?', 'Canadá', 'Rusia', 'Noruega', 'Islandia', 3),
-('¿Qué río es el más largo del mundo?', 'Río Nilo', 'Río Amazonas', 'Río Yangtsé', 'Río Misisipi', 2);
+('¿Qué espacio se encuentra al costado del Perú y es importante para las regiones?', 'Ecuador', 'Chile', 'Mar Peruano', 'EEUU', 3),
+('¿Qué actividad "NO" se puede realizar en el Mar Peruano?', 'Pesca', 'Surf', 'Estudio de vida marina', 'Alpinismo', 4),
+('¿Cuál "NO" es una región del Perú?', 'Costa', 'Sierra', 'Arequipa', 'Selva', 3),
+('¿Cuál producto no se cosecha en la Costa Peruana?', 'Uva', 'Cactus', 'Azúcar', 'Arroz', 2),
+('¿Cómo es el clima en la Costa?', 'Lluvioso', 'Desértico', 'Semicálido (agradable)', 'Hace mucho frío', 3),
+('¿Cómo son los techos de las casas de la Costa?', 'En forma de cono', 'Planos o rectos', 'No tienen techo', 'No hay casas', 2),
+('¿Cómo se llama también a la región de la Sierra?', 'Playa', 'Región Andina', 'Región Tropical', 'Región Nevada', 2),
+('¿Qué podemos encontrar en la región de la Sierra?', 'La cordillera de los Andes', 'Abundantes bosques', 'Playas costeras', 'El Mar Peruano', 1),
+('¿Qué alimento "NO" se cosecha comúnmente en la Sierra?', 'Papa', 'Cebolla', 'Arroz', 'Maíz', 3),
+('¿Cómo es el clima en la Sierra?', 'Lluvioso - húmedo', 'Desértico', 'Nublado todo el año', 'Hace mucha calor', 1),
+('¿Cómo son los techos comúnmente en las casas de la Sierra?', 'En forma de triángulo', 'En forma de esfera', 'No tienen techo', 'En forma de círculo', 1),
+('¿De qué color se representa la región de la Costa?', 'Amarillo', 'Azul', 'Verde', 'Café', 1),
+('¿De qué color se representa el Mar Peruano?', 'Amarillo', 'Azul', 'Verde', 'Café', 2),
+('¿De qué color se representa la región de la Selva?', 'Amarillo', 'Azul', 'Verde', 'Café', 3),
+('¿De qué color se representa la región de la Sierra?', 'Amarillo', 'Azul', 'Verde', 'Café', 4),
+('¿Qué podemos encontrar en la región de la Selva?', 'La cordillera de los Andes', 'Abundantes bosques', 'Playas costeras', 'El Mar Peruano', 2),
+('¿Qué alimento "NO" se cosecha comúnmente en la Selva?', 'Piña', 'Papaya', 'Haba', 'Plátano', 3),
+('¿Cómo es el clima en la Selva?', 'Lluvioso - nevado', 'Desértico', 'Nublado todo el año', 'Hace mucha calor y llueve', 4);
 
 INSERT INTO preguntas_gastronomia (pregunta, opcion1, opcion2, opcion3, opcion4, respuesta_correcta) VALUES
 ('¿Cuál es el plato emblemático de la cocina peruana a base de pescado crudo marinado en jugo de limón?', 'Anticuchos', 'Lomo Saltado', 'Ceviche', 'Ají de Gallina', 3),
