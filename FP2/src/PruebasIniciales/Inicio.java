@@ -1,7 +1,6 @@
 package PruebasIniciales;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,10 +14,9 @@ import javafx.scene.media.*;
 public class Inicio extends JPanel {
 
     private static final String VIDEO_PATH = "../video/fondo.mp4"; // Ruta al archivo de video
-    private static final String CREDITOS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Créditos
-    private static final String LOGROS_IMAGE_PATH = "../imagenes/img1_fondo.jpg"; // Ruta a la imagen de fondo de Logros
     private static final String SOUND_PATH = "../sonidos/inicio.wav"; // Ruta al archivo de sonido
     private static final String PREGUNTAS_SOUND_PATH = "../sonidos/panel.wav"; // Ruta al archivo de sonido de preguntas
+    private final String CREDITOS_IMAGE_PATH = "../imagenes/img1_fondo.jpg";
     private MediaPlayer mediaPlayer;
 
     private String nombreUsuario;
@@ -67,7 +65,7 @@ public class Inicio extends JPanel {
         });
     }
 
-    private void mostrarPanelInicio() {
+    void mostrarPanelInicio() {
         overlayPanel = new JPanel(new GridBagLayout());
         overlayPanel.setOpaque(false);
         overlayPanel.setBounds(0, 0, getWidth(), getHeight());
@@ -137,8 +135,14 @@ public class Inicio extends JPanel {
 
         // Añadir ActionListeners a los botones
         iniciarJuegoButton.addActionListener(e -> mostrarPanelNombre());
-        logrosButton.addActionListener(e -> mostrarPanelLogros());
-        creditosButton.addActionListener(e -> mostrarPanelCreditos());
+        logrosButton.addActionListener(e -> {
+            Logros logros = new Logros(this);
+            logros.mostrarPanelLogros(layeredPane, fxPanel);
+        });
+        creditosButton.addActionListener(e -> {
+            Creditos creditos = new Creditos(this);
+            creditos.mostrarPanelCreditos(layeredPane, fxPanel);
+        });
         salirButton.addActionListener(e -> System.exit(0));
     }
 
@@ -253,8 +257,14 @@ public class Inicio extends JPanel {
         overlayPanel.add(mainPanel, gbc);
 
         iniciarJuegoButton.addActionListener(e -> mostrarPanelNombre());
-        logrosButton.addActionListener(e -> mostrarPanelLogros());
-        creditosButton.addActionListener(e -> mostrarPanelCreditos());
+        logrosButton.addActionListener(e -> {
+            Logros logros = new Logros(this);
+            logros.mostrarPanelLogros(layeredPane, fxPanel);
+        });
+        creditosButton.addActionListener(e -> {
+            Creditos creditos = new Creditos(this);
+            creditos.mostrarPanelCreditos(layeredPane, fxPanel);
+        });
         salirButton.addActionListener(e -> System.exit(0));
 
         layeredPane.removeAll();
@@ -407,8 +417,6 @@ public class Inicio extends JPanel {
         layeredPane.revalidate();
     }
 
-    
-
     public void mostrarPantallaInicial() {
         System.out.println("Reconfigurando pantalla inicial...");
         stopCurrentClip();
@@ -417,119 +425,13 @@ public class Inicio extends JPanel {
     }
 
     private void mostrarPanelCreditos() {
-        overlayPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                ImageIcon backgroundIcon = new ImageIcon(getClass().getResource(CREDITOS_IMAGE_PATH));
-                Image background = backgroundIcon.getImage();
-                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-        overlayPanel.setOpaque(false);
-        overlayPanel.setBounds(0, 0, getWidth(), getHeight());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-
-        // Panel de botones centrado
-        JPanel creditosPanel = new JPanel(new GridLayout(5, 1, 10, 10));
-        creditosPanel.setOpaque(false);
-
-        JButton valerioButton = new JButton("Valerio");
-        JButton valerio2Button = new JButton("Andres");
-        JButton valerio3Button = new JButton("Valerio3");
-        JButton valerio4Button = new JButton("Valerio4");
-        JButton salirButton = new JButton("Salir");
-
-        salirButton.addActionListener(e -> {
-            layeredPane.remove(overlayPanel);
-            mostrarPanelInicio();
-        });
-
-        creditosPanel.add(valerioButton);
-        creditosPanel.add(valerio2Button);
-        creditosPanel.add(valerio3Button);
-        creditosPanel.add(valerio4Button);
-        creditosPanel.add(salirButton);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        overlayPanel.add(creditosPanel, gbc);
-
-        layeredPane.removeAll();
-        layeredPane.add(fxPanel, Integer.valueOf(1)); // Asegurarse de que el video esté detrás
-        layeredPane.add(overlayPanel, Integer.valueOf(2)); // Añadir el panel de botones en la capa superior
-        layeredPane.repaint();
-        layeredPane.revalidate();
+        Creditos creditos = new Creditos(this);
+        creditos.mostrarPanelCreditos(layeredPane, fxPanel);
     }
 
     private void mostrarPanelLogros() {
-        overlayPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                ImageIcon backgroundIcon = null;
-                try {
-                    backgroundIcon = new ImageIcon(getClass().getResource(LOGROS_IMAGE_PATH));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (backgroundIcon != null) {
-                    Image background = backgroundIcon.getImage();
-                    g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-                }
-            }
-        };
-        overlayPanel.setOpaque(false);
-        overlayPanel.setBounds(0, 0, getWidth(), getHeight());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-
-        // Panel con la tabla centrada
-        JPanel logrosPanel = new JPanel(new BorderLayout());
-        logrosPanel.setOpaque(false);
-
-        String[] columnNames = {"Nombre", "Puntaje"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-
-        try (Connection conn = Conexion.getConnection()) {
-            String query = "SELECT nombre, puntaje FROM usuarios ORDER BY puntaje DESC";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                int puntaje = rs.getInt("puntaje");
-                model.addRow(new Object[]{nombre, puntaje});
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los logros", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-        }
-
-        JTable table = new JTable(model);
-        table.setFillsViewportHeight(true);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 300));
-        JScrollPane scrollPane = new JScrollPane(table);
-        logrosPanel.add(scrollPane, BorderLayout.CENTER);
-
-        // Agregar botón Salir
-        JButton salirButton = new JButton("Salir");
-        salirButton.addActionListener(e -> {
-            layeredPane.remove(overlayPanel);
-            mostrarPanelInicio();
-        });
-        logrosPanel.add(salirButton, BorderLayout.SOUTH);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        overlayPanel.add(logrosPanel, gbc);
-
-        layeredPane.removeAll();
-        layeredPane.add(fxPanel, Integer.valueOf(1));
-        layeredPane.add(overlayPanel, Integer.valueOf(2));
-        layeredPane.repaint();
-        layeredPane.revalidate();
+        Logros logros = new Logros(this);
+        logros.mostrarPanelLogros(layeredPane, fxPanel);
     }
 
     private void stopCurrentClip() {
